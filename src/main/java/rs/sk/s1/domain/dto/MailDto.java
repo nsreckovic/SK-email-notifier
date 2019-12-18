@@ -1,4 +1,4 @@
-package rs.sk.s1.dto;
+package rs.sk.s1.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

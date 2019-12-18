@@ -7,7 +7,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import rs.sk.s1.dto.MailDto;
+import rs.sk.s1.domain.dto.MailDto;
 
 @Component
 @EnableBinding(OutputChannel.class)
@@ -20,7 +20,7 @@ public class Scheduler {
 
     @Scheduled(fixedDelay = 10000)
     public void publish() {
-        MailDto mailDto = new MailDto("example@email.com", "Mail Title", "This is mail body text.");
+        MailDto mailDto = new MailDto("pgalantic17@raf.rs", "Mail Title", "This is mail body text.");
         outputChannel.output().send(MessageBuilder.withPayload(mailDto).build());
         logger.info(mailDto.toString());
     }
