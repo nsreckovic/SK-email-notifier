@@ -28,6 +28,18 @@ public class Weather {
     private String city;
 
     @Column(name = "temp")
-    private double temp;
+    private float temp;
+
+    @Column(name = "feels_like")
+    private float feels_like;
+
+    @Column(name = "pressure")
+    private float pressure;
+
+    @Column(name = "humidity")
+    private float humidity;
+
+    @Column(name = "visibility")
+    private float visibility;
 
 }

@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TemperatureDto {
 
-    private double temp;
+    private float temp;
+
+    private float feels_like;
+
+    private float pressure;
+
+    private float humidity;
 
 }

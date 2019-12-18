@@ -7,16 +7,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WeatherDto {
+public class CityDto {
+
+    private int id;
 
     private String name;
 
-    private int id;
-    private int timezone;
-    private String country;
-
-    private TemperatureDto main;
+    private int visibility;
 
     private CountryDto sys;
+
+    private TemperatureDto main;
 
 }
