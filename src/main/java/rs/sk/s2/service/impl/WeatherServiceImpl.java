@@ -24,11 +24,6 @@ public class WeatherServiceImpl implements WeatherService {
     private final RestTemplate restTemplate;
 
     @Override
-    public List<Weather> saveWeatherLocaly() {
-        return null;
-    }
-
-    @Override
     public Weather getWeather(String uri) {
         ResponseEntity<CityDto> res = restTemplate.getForEntity(uri, CityDto.class);
         Weather weather = new Weather();
@@ -50,6 +45,7 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public void updateWeather(Weather weather) {
+        weather = getWeatherByCityAndCountry(weather.getCity(), weather.getCountry());
         weatherDao.save(weather);
     }
 
