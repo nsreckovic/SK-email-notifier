@@ -12,7 +12,7 @@ public class WeatherDto {
     private String name;
 
     private int id;
-
+    private int timezone;
     private String country;
 
     private TemperatureDto main;

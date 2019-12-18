@@ -21,13 +21,13 @@ public class Weather {
     @Id
     private int id;
 
-    @Column(name = "city")
-    private String city;
-
     @Column(name = "country")
     private String country;
 
-    @Column(name = "temparature")
-    private float temperature;
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "temp")
+    private double temp;
 
 }

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TemperatureDto {
 
-    private float temp;
+    private double temp;
 
 }

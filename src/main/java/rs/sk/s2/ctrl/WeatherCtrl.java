@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping(value = "/weather")
 public class WeatherCtrl {
 
-    private final WeatherService weatherService;
+    private final WeatherServiceImpl weatherService;
 
     @GetMapping("/{country}/{city}")
     public Weather getWeatherByCityAndCountry(@PathVariable("country") String country, @PathVariable("city") String city){
@@ -26,7 +26,7 @@ public class WeatherCtrl {
 
     // Over here boys
     @GetMapping("/updateAll")
-    @Scheduled(fixedRate = 100000)
+    @Scheduled(fixedRate = 10000)
     public List<Weather> updateWeather(){
         List<Weather> weatherList = weatherService.getAllWeathers();
         for (Weather w : weatherList){
@@ -43,6 +43,9 @@ public class WeatherCtrl {
 
     @GetMapping("/findAll")
     public List<Weather> getAllWeathers(){
+        return weatherService.getAllWeathers();
+    }
+    public List<Weather> getAllWeathersMain(){
         return weatherService.getAllWeathers();
     }
 }
