@@ -13,7 +13,7 @@ import rs.sk.s1.domain.dto.SubscriptionDto;
 import rs.sk.s1.service.SubscriptionService;
 
 @RestController
-@RequestMapping(value = "/subcription")
+@RequestMapping(value = "/subscription")
 @RequiredArgsConstructor
 public class SubscriptionCtrl {
 
