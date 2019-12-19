@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface WeatherService {
 
-    List<Weather> saveWeatherLocaly();
-
     Weather getWeather(String uri);
 
     List<Weather> getAllWeathers();
