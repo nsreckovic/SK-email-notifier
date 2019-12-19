@@ -19,9 +19,12 @@ public class Subscription {
     private int id;
 
     @Column(name = "user")
-    private String username;
+    private String email;
+
+    @Column(name = "city_id")
+    private int city_id;
 
     @Column(name = "city")
-    private String city;
+    private String city_name;
 
 }

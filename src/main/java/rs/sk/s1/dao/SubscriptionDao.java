@@ -15,4 +15,6 @@ public interface SubscriptionDao extends JpaRepository<Subscription, Integer> {
     @Query(value = "SELECT * FROM subscription sub WHERE sub.username = ?1 AND sub.city = ?2", nativeQuery = true)
     List<Subscription> getSubscriptionsByUsernameAndCity(String username, String city);
 
+
+
 }

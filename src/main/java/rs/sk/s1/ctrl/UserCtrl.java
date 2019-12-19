@@ -5,6 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import rs.sk.s1.dao.UserDao;
 import rs.sk.s1.domain.User;
+import rs.sk.s1.domain.dto.LoginDto;
 import rs.sk.s1.domain.dto.UserRequestDto;
 import rs.sk.s1.domain.dto.UserResponseDto;
 import rs.sk.s1.service.UserService;
@@ -25,10 +26,16 @@ public class UserCtrl {
         return userService.saveUser(requestUser);
     }
 
-//    @GetMapping("/findAll")
-//    public List<UserResponseDto> findAll() {
-//        return userService.findAll();
-//    }
+    @GetMapping("/findAll")
+    public List<UserResponseDto> findAll() {
+        return userService.findAll();
+    }
+
+    @PostMapping("/login")
+    public UserResponseDto login(@Validated @RequestBody LoginDto loginDto) {
+        return userService.login(loginDto);
+    }
+
 //
 //    @GetMapping("/all")
 //    public List<User> findByDomain() {

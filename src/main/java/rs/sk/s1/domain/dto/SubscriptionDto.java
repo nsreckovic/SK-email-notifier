@@ -3,23 +3,19 @@ package rs.sk.s1.domain.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rs.sk.s1.domain.User;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class UserResponseDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SubscriptionDto {
 
-    @Email
     private String email;
 
-    @NotNull
-    private String name;
+    private int city_id;
 
-    public UserResponseDto(User user) {
-        this.email = user.getEmail();
-        this.name  = user.getName();
-    }
+    private String city_name;
 
 }

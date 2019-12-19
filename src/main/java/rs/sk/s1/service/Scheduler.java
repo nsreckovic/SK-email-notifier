@@ -18,7 +18,7 @@ public class Scheduler {
 
     private final OutputChannel outputChannel;
 
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 21600000) // Every 6h
     public void publish() {
         MailDto mailDto = new MailDto("pgalantic17@raf.rs", "Mail Title", "This is mail body text.");
         outputChannel.output().send(MessageBuilder.withPayload(mailDto).build());

@@ -1,13 +1,18 @@
 package rs.sk.s1.service;
 
 import rs.sk.s1.domain.User;
+import rs.sk.s1.domain.dto.LoginDto;
 import rs.sk.s1.domain.dto.UserRequestDto;
 import rs.sk.s1.domain.dto.UserResponseDto;
+
+import java.util.List;
 
 public interface UserService {
 
     UserResponseDto saveUser(UserRequestDto requestUser);
 
-    User logIn(String username, String password);
+    List<UserResponseDto> findAll();
+
+    UserResponseDto login(LoginDto loginDto);
 
 }
