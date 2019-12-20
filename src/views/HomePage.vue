@@ -6,7 +6,6 @@
     </Navbar>
 </template>
 <script>
-    import axios from 'axios'
     import Navbar from "./Navbar";
     export default {
         name: "HomePage",
@@ -19,9 +18,7 @@
             }
         },
         mounted() {
-            axios.get('http://localhost:3000/api/posts').then((res) => {
-                this.posts = res.data.posts;
-            });
+
         }
     }
 </script>

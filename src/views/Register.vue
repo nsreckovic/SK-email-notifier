@@ -8,12 +8,12 @@
                     <input v-model="form.name" type="text" class="form-control" id="InputName" placeholder="Enter name">
                 </div>
                 <div class="form-group">
-                    <label for="InputEmail">Email:</label>
-                    <input v-model="form.email" type="text" class="form-control" id="InputEmail" placeholder="Enter email">
+                    <label for="InputSurname">Surname:</label>
+                    <input v-model="form.surname" type="text" class="form-control" id="InputSurname" placeholder="Enter surname">
                 </div>
                 <div class="form-group">
-                    <label for="InputUsername">Username:</label>
-                    <input v-model="form.username" type="text" class="form-control" id="InputUsername" placeholder="Enter username">
+                    <label for="InputEmail">Email:</label>
+                    <input v-model="form.email" type="text" class="form-control" id="InputEmail" placeholder="Enter email">
                 </div>
                 <div class="form-group">
                     <label for="InputPassword">Password:</label>
@@ -40,8 +40,8 @@
             return {
                 form: {
                     name: null,
+                    surname: null,
                     email: null,
-                    username: null,
                     password: null,
                     password2: null
                 }
@@ -49,25 +49,42 @@
         },
         methods: {
             submit: function() {
-                axios.post('http://localhost:3000/api/users/register', this.form).then((response) => {
-                    //console.log(response);
-                    this.asd = response;
-                    this.$router.push('/');
-                    this.$notify({
-                        group: 'Notifications',
-                        type: 'vue-notification success',
-                        position: 'top left',
-                        title: 'Success',
-                        text: 'You registered successfuly.'
-                    });
-                }).catch((error) => {
+                if (!this.form.name || !this.form.surname || !this.form.email || !this.form.password || !this.form.password2) {
                     this.$notify({
                         group: 'Notifications',
                         type: 'vue-notification error',
                         title: 'Register exception',
-                        text: error
+                        text: 'Please fill in all fields!'
                     });
-                });
+                } else {
+                    if (this.form.password === this.form.password2) {
+                        axios.post('http://localhost:8081/user/save', this.form).then((response) => {
+                            this.asd = response;
+                            this.$router.push('/users/login');
+                            this.$notify({
+                                group: 'Notifications',
+                                type: 'vue-notification success',
+                                position: 'top left',
+                                title: 'Success',
+                                text: 'You registered successfuly.'
+                            });
+                        }).catch((error) => {
+                            this.$notify({
+                                group: 'Notifications',
+                                type: 'vue-notification error',
+                                title: 'Register exception',
+                                text: error
+                            });
+                        });
+                    } else {
+                        this.$notify({
+                            group: 'Notifications',
+                            type: 'vue-notification error',
+                            title: 'Register exception',
+                            text: 'Passwords must match!'
+                        });
+                    }
+                }
             }
         }
     }

@@ -20,7 +20,6 @@
     import Navbar from "./Navbar";
     import axios from 'axios';
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
     export default {
         name: "Login",
         components: {
@@ -36,16 +35,27 @@
         },
         methods: {
             submit: function () {
-                axios.get('http://localhost:8081/user/login', this.form).then((response) => {
-                    this.$store.commit('set_user', response.data);
-                    this.$router.push('/');
-                    this.$notify({
-                        group: 'Notifications',
-                        type: 'vue-notification success',
-                        position: 'top left',
-                        title: 'Success',
-                        text: 'You logged in successfuly.'
-                    });
+                axios.post('http://localhost:8081/user/login', this.form).then((response) => {
+                    // eslint-disable-next-line no-console
+                    if (typeof response.data.email === 'undefined') {
+                        this.$notify({
+                            group: 'Notifications',
+                            type: 'vue-notification error',
+                            title: 'Login exception',
+                            text: 'Wrong email or password!'
+                        });
+                    } else {
+                        this.$store.commit('set_user', response.data);
+                        this.$router.push('/');
+                        this.$notify({
+                            group: 'Notifications',
+                            type: 'vue-notification success',
+                            position: 'top left',
+                            title: 'Success',
+                            text: 'You logged in successfuly.'
+                        });
+                    }
+
                 }).catch((error) => {
                     this.$notify({
                         group: 'Notifications',
