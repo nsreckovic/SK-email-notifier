@@ -40,18 +40,15 @@ public class Scheduler {
             sb.append(",");
         }
         if(sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
-        else System.out.printf("ubiga");
         return sb.toString();
     }
 
     @Scheduled(fixedDelay = 21600000) // Every 6h
     public void publish() {
 
-       // List<Subscription> subscriptionList = subscriptionDao.findAll();
         List<User> userList = userDao.findAll();
 
         for(User u : userList) {
-            logger.warn(u.getEmail());
             List<Subscription> subscriptionList = subscriptionDao.findSubscriptionsByEmail(u.getEmail());
             List<WeatherDto> weatherList = communicationService.getWeatherByCity(findCities(subscriptionList));
 
@@ -71,7 +68,7 @@ public class Scheduler {
             body.append("Your NP weather team!");
 
             MailDto mailDto = new MailDto(u.getEmail(), "Todays weather", body.toString());
-            outputChannel.output().send(MessageBuilder.withPayload(mailDto).build());
+            //outputChannel.output().send(MessageBuilder.withPayload(mailDto).build());
 
         }
 

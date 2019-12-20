@@ -21,7 +21,9 @@ public class UserCtrl {
 
     private final UserDao userDao;
 
+    @CrossOrigin
     @PostMapping("/save")
+    @ResponseBody
     public UserResponseDto save(@Validated @RequestBody UserRequestDto requestUser) {
         return userService.saveUser(requestUser);
     }
@@ -31,7 +33,9 @@ public class UserCtrl {
         return userService.findAll();
     }
 
+    @CrossOrigin
     @PostMapping("/login")
+    @ResponseBody
     public UserResponseDto login(@Validated @RequestBody LoginDto loginDto) {
         return userService.login(loginDto);
     }
