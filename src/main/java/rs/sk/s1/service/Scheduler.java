@@ -68,7 +68,7 @@ public class Scheduler {
             body.append("Your NP weather team!");
 
             MailDto mailDto = new MailDto(u.getEmail(), "Todays weather", body.toString());
-            //outputChannel.output().send(MessageBuilder.withPayload(mailDto).build());
+            outputChannel.output().send(MessageBuilder.withPayload(mailDto).build());
 
         }
 
