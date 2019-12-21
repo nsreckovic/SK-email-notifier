@@ -62,7 +62,15 @@
                 if (!this.selectAll) {
                     axios.post('http://localhost:8081/subscription/removeSubscriptions', {email:this.$store.state.user.email, cities:this.selected}).then((response) => {
                         // eslint-disable-next-line no-console
-                        console.log(response.data);
+                        this.asd = response;
+                        this.$notify({
+                            group: 'Notifications',
+                            type: 'vue-notification success',
+                            position: 'top left',
+                            title: 'Success',
+                            text: 'You unsubscribed successfuly.'
+                        });
+                        this.$router.push('/');
                     }).catch((error) => {
                         this.$notify({
                             group: 'Notifications',
