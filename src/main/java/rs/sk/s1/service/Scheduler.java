@@ -50,26 +50,27 @@ public class Scheduler {
 
         for(User u : userList) {
             List<Subscription> subscriptionList = subscriptionDao.findSubscriptionsByEmail(u.getEmail());
-            List<WeatherDto> weatherList = communicationService.getWeatherByCity(findCities(subscriptionList));
+            if (!subscriptionList.isEmpty()) {
+                List<WeatherDto> weatherList = communicationService.getWeatherByCity(findCities(subscriptionList));
 
-            StringBuilder body = new StringBuilder();
-            body.append("Dear " + u.getName() + " " + u.getSurname() + ",\n\n");
-            body.append("Todays weather for your subscriptions is:\n\n");
+                StringBuilder body = new StringBuilder();
+                body.append("Dear " + u.getName() + " " + u.getSurname() + ",\n\n");
+                body.append("Todays weather for your subscriptions is:\n\n");
 
-            for(WeatherDto w : weatherList) {
-                body.append(w.getCity() + ", " + w.getCountry() + ":\n\n");
-                body.append("\tTemperature: " + w.getTemp() + "°C\n");
-                body.append("\tFeels like: " + w.getFeels_like() + "°C\n");
-                body.append("\tHumidity: " + w.getHumidity() + "%\n");
-                body.append("\tPressure: " + w.getPressure() + "mb\n");
-                body.append("\tVisibility: " + (w.getVisibility() / 1000) + "km\n\n");
+                for (WeatherDto w : weatherList) {
+                    body.append(w.getCity() + ", " + w.getCountry() + ":\n\n");
+                    body.append("\tTemperature: " + w.getTemp() + "°C\n");
+                    body.append("\tFeels like: " + w.getFeels_like() + "°C\n");
+                    body.append("\tHumidity: " + w.getHumidity() + "%\n");
+                    body.append("\tPressure: " + w.getPressure() + "mb\n");
+                    body.append("\tVisibility: " + (w.getVisibility() / 1000) + "km\n\n");
+                }
+
+                body.append("Your NP weather team!");
+
+                MailDto mailDto = new MailDto(u.getEmail(), "Todays weather", body.toString());
+                outputChannel.output().send(MessageBuilder.withPayload(mailDto).build());
             }
-
-            body.append("Your NP weather team!");
-
-            MailDto mailDto = new MailDto(u.getEmail(), "Todays weather", body.toString());
-            outputChannel.output().send(MessageBuilder.withPayload(mailDto).build());
-
         }
 
     }
