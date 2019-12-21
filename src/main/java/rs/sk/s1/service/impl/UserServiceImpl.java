@@ -19,7 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger("SchedulerService");
+    private static final Logger logger = LoggerFactory.getLogger("User Service");
 
     private final UserDao userDao;
 
@@ -30,9 +30,8 @@ public class UserServiceImpl implements UserService {
             user.setPassword(requestUser.getPassword());
             user.setName(requestUser.getName());
             user.setSurname(requestUser.getSurname());
-
         userDao.save(user);
-
+        logger.info("User: " + user.toString() + " saved.");
         return new UserResponseDto(user);
     }
 
@@ -49,15 +48,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto login(LoginDto loginDto) {
         Optional<User> optUser = userDao.findByEmailAndPassword(loginDto.getEmail(), loginDto.getPassword());
-
         if(optUser.isPresent()) {
-            logger.info("User with email: \"" + loginDto.getEmail() + "\" exists.");
+            logger.info("User with email: \"" + loginDto.getEmail() + "\" logged in.");
             return new UserResponseDto(optUser.get());
         } else {
-            logger.warn("User with email: \"" + loginDto.getEmail() + "\" does NOT exist.");
+            logger.warn("Wrong username or password!");
             return null;
         }
-
     }
 
 }

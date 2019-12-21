@@ -20,10 +20,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SubscriptionServiceImpl implements SubscriptionService {
 
-    private static final Logger logger = LoggerFactory.getLogger("SchedulerService");
+    private static final Logger logger = LoggerFactory.getLogger("Subscription Service");
 
     private final SubscriptionDao subscriptionDao;
-
     private final CommunicationService communicationService;
 
     @Override
@@ -32,9 +31,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscription.setEmail(email);
         subscription.setCity_id(cityDto.getId());
         subscription.setCity_name(cityDto.getName());
-        logger.info(subscription.toString());
+        logger.info("Added subscription: " + subscription.toString());
         subscriptionDao.save(subscription);
-
         return new SubscriptionDto(subscription.getEmail(), subscription.getCity_id(), subscription.getCity_name());
     }
 
@@ -44,7 +42,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscription.setEmail(email);
         subscription.setCity_id(cityDto.getId());
         subscription.setCity_name(cityDto.getName());
-        logger.info(subscription.toString());
+        logger.info("Removed subscription: " + subscription.toString());
         subscriptionDao.removeSubscription(subscription.getEmail(), subscription.getCity_name());
         return "Success!";
     }
@@ -79,7 +77,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public List<WeatherDto> getSubscribedWeather(String email) {
         List<WeatherDto> weatherList = communicationService.getAllWeather();
         List<Subscription> subscriptionList = subscriptionDao.findSubscriptionsByEmail(email);
-        System.out.println(subscriptionList);
         List<WeatherDto> finalList  = filterWeather(weatherList, subscriptionList, true);
         return finalList;
     }
@@ -88,8 +85,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public List<WeatherDto> getNotSubscribedWeather(String email) {
         List<WeatherDto> weatherList = communicationService.getAllWeather();
         List<Subscription> subscriptionList = subscriptionDao.findSubscriptionsByEmail(email);
-        System.out.println(subscriptionList);
         List<WeatherDto> finalList  = filterWeather(weatherList, subscriptionList, false);
         return finalList;
     }
+
 }
