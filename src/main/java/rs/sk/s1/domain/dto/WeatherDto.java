@@ -3,6 +3,7 @@ package rs.sk.s1.domain.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import rs.sk.s1.domain.Subscription;
 
 import javax.persistence.Id;
 
@@ -27,5 +28,14 @@ public class WeatherDto {
     private int humidity;
 
     private int visibility;
+
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof WeatherDto){
+            WeatherDto w = (WeatherDto) o;
+            if (w.getCity().equals(this.getCity())) return true;
+        }
+        return false;
+    }
 
 }

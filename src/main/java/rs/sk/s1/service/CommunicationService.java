@@ -13,9 +13,9 @@ public interface CommunicationService {
     @GetMapping("/weather/findByCities/{cities}")
     List<WeatherDto> getWeatherByCity(@PathVariable("cities") String cities);
 
-    /*
-     @GetMapping("/findByCities")
-     List<WeatherDto> getWeatherByCity(@RequestParam(value = "cities") String cities);
-    */
+
+    @GetMapping("/weather/findAll")
+    List<WeatherDto> getAllWeather();
+
 
 }
