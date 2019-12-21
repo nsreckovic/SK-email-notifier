@@ -1,11 +1,11 @@
 <template>
     <Navbar>
         <div class="mx-auto" style="width: 80%">
-            <h2>Current weather</h2>
+            <h2>My subscriptions</h2>
             <table class="table table-striped table-hover table-bordered text-center ">
                 <thead>
                 <tr>
-                    <th v-if="$store.state.loggedIn===true">
+                    <th>
                         <label class="form-checkbox">
                             <input type="checkbox" v-model="selectAll" @click="select">
                             <i class="form-icon"></i>
@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="i in items" v-bind:key="i.id">
-                    <td v-if="$store.state.loggedIn===true">
+                    <td>
                         <label class="form-checkbox">
                             <input type="checkbox" :value="{id:i.id, name:i.city}" v-model="selected">
                             <i class="form-icon"></i>
@@ -30,15 +30,15 @@
                     </td>
                     <td>{{i.city}}</td>
                     <td>{{i.country}}</td>
-                    <td>{{Math.floor(i.temp)}}°C</td>
-                    <td>{{Math.floor(i.feels_like)}}°C</td>
-                    <td>{{Math.floor(i.pressure)}}mb</td>
-                    <td>{{Math.floor(i.humidity)}}%</td>
-                    <td>{{Math.floor(i.visibility)}}m</td>
+                    <td>{{i.temp}}°C</td>
+                    <td>{{i.feels_like}}°C</td>
+                    <td>{{i.pressure}}mb</td>
+                    <td>{{i.humidity}}%</td>
+                    <td>{{i.visibility}}m</td>
                 </tr>
                 </tbody>
             </table>
-            <button v-if="$store.state.loggedIn===true" class="btn btn-primary" @click="subscribe">Subscribe</button>
+            <button class="btn btn-primary" @click="unsubscribe">Unsubscribe</button>
         </div>
     </Navbar>
 </template>
@@ -47,7 +47,7 @@
     import axios from 'axios';
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     export default {
-        name: "HomePage",
+        name: "MySubscriptions",
         components: {
             Navbar
         },
@@ -58,18 +58,11 @@
             request: null
         }),
         methods: {
-            subscribe: function(){
+            unsubscribe: function(){
                 if (!this.selectAll) {
-                    axios.post('http://localhost:8081/subscription/saveSubscriptions', {email:this.$store.state.user.email, cities:this.selected}).then((response) => {
-                        this.asd = response;
-                        this.$router.push('/mySubscriptions');
-                        this.$notify({
-                            group: 'Notifications',
-                            type: 'vue-notification success',
-                            position: 'top left',
-                            title: 'Success',
-                            text: 'Subscription successfuly.'
-                        });
+                    axios.post('http://localhost:8081/subscription/removeSubscriptions', {email:this.$store.state.user.email, cities:this.selected}).then((response) => {
+                        // eslint-disable-next-line no-console
+                        console.log(response.data);
                     }).catch((error) => {
                         this.$notify({
                             group: 'Notifications',
@@ -89,29 +82,16 @@
                 }
             },
             init: function(){
-                if (this.$store.state.loggedIn){
-                    axios.post('http://localhost:8081/subscription/getNotSubscribedWeather',this.$store.state.user.email).then((response) => {
-                        this.items = response.data;
-                    }).catch((error) => {
-                        this.$notify({
-                            group: 'Notifications',
-                            type: 'vue-notification error',
-                            title: 'Initialise exception',
-                            text: error
-                        });
+                axios.post('http://localhost:8081/subscription/getSubscribedWeather',this.$store.state.user.email).then((response) => {
+                    this.items = response.data;
+                }).catch((error) => {
+                    this.$notify({
+                        group: 'Notifications',
+                        type: 'vue-notification error',
+                        title: 'Initialise exception',
+                        text: error
                     });
-                } else {
-                    axios.get('http://localhost:8082/weather/findAll').then((response) => {
-                        this.items = response.data;
-                    }).catch((error) => {
-                        this.$notify({
-                            group: 'Notifications',
-                            type: 'vue-notification error',
-                            title: 'Initialise exception',
-                            text: error
-                        });
-                    });
-                }
+                });
             }
         },
         beforeMount(){

@@ -1,7 +1,7 @@
 <template>
     <Navbar>
         <div class="mx-auto" style="width: 800px;">
-            <h1>Register</h1>
+            <h2>Register</h2>
             <form @submit.prevent="submit">
                 <div class="form-group">
                     <label for="InputName">Name:</label>
@@ -89,3 +89,9 @@
         }
     }
 </script>
+<style>
+    h2{
+        padding-top: 1%;
+        padding-bottom: 1%
+    }
+</style>

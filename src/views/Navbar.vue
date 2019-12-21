@@ -8,6 +8,9 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul v-if="$store.state.loggedIn===true" class="navbar-nav navbar-left">
+                    <router-link class="nav-link" to="/mySubscriptions">My subscriptions<span class="sr-only">(current)</span></router-link>
+                </ul>
                 <ul class="navbar-nav ml-auto">
                     <template v-if="$store.state.loggedIn===false">
                         <li class="nav-item">
