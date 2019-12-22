@@ -16,7 +16,7 @@ public class MailSenderImpl implements MailSender {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    private static final Logger logger = LoggerFactory.getLogger("SchedulerService");
+    private static final Logger logger = LoggerFactory.getLogger("MailSender Service");
 
     @Async
     @Override
