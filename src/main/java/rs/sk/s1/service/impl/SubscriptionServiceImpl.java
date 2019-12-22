@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import rs.sk.s1.dao.SubscriptionDao;
 import rs.sk.s1.domain.Subscription;
 import rs.sk.s1.domain.dto.CityDto;
-import rs.sk.s1.domain.dto.LoginDto;
 import rs.sk.s1.domain.dto.SubscriptionDto;
 import rs.sk.s1.domain.dto.WeatherDto;
 import rs.sk.s1.service.CommunicationService;

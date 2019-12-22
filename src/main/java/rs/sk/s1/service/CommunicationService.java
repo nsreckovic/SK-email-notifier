@@ -7,7 +7,7 @@ import rs.sk.s1.domain.dto.WeatherDto;
 
 import java.util.List;
 
-@FeignClient(name = "service", url = "http://localhost:8082")
+@FeignClient(name = "service", url = "http://localhost:9020")
 public interface CommunicationService {
 
     @GetMapping("/weather/findByCities/{cities}")

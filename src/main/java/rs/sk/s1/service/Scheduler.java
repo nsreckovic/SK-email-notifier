@@ -1,14 +1,10 @@
 package rs.sk.s1.service;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 import rs.sk.s1.dao.SubscriptionDao;
 import rs.sk.s1.dao.UserDao;
 import rs.sk.s1.domain.Subscription;
@@ -23,14 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Scheduler {
 
-    private static final Logger logger = LoggerFactory.getLogger("SchedulerService");
-
     private final OutputChannel outputChannel;
-
     private final SubscriptionDao subscriptionDao;
-
     private final CommunicationService communicationService;
-
     private final UserDao userDao;
 
     private String findCities(List<Subscription> subscriptionsList) {

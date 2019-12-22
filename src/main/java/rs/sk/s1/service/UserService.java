@@ -1,6 +1,5 @@
 package rs.sk.s1.service;
 
-import rs.sk.s1.domain.User;
 import rs.sk.s1.domain.dto.LoginDto;
 import rs.sk.s1.domain.dto.UserRequestDto;
 import rs.sk.s1.domain.dto.UserResponseDto;

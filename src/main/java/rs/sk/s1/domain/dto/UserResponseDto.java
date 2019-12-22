@@ -1,8 +1,6 @@
 package rs.sk.s1.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import rs.sk.s1.domain.User;
 
 import javax.validation.constraints.Email;

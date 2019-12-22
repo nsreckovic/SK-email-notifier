@@ -3,7 +3,6 @@ package rs.sk.s1.domain.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rs.sk.s1.domain.Subscription;
 
 import javax.persistence.Id;
 

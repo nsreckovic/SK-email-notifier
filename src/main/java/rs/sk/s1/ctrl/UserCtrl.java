@@ -3,8 +3,6 @@ package rs.sk.s1.ctrl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import rs.sk.s1.dao.UserDao;
-import rs.sk.s1.domain.User;
 import rs.sk.s1.domain.dto.LoginDto;
 import rs.sk.s1.domain.dto.UserRequestDto;
 import rs.sk.s1.domain.dto.UserResponseDto;
@@ -18,8 +16,6 @@ import java.util.List;
 public class UserCtrl {
 
     private final UserService userService;
-
-    private final UserDao userDao;
 
     @CrossOrigin
     @PostMapping("/save")
@@ -39,12 +35,5 @@ public class UserCtrl {
     public UserResponseDto login(@Validated @RequestBody LoginDto loginDto) {
         return userService.login(loginDto);
     }
-
-//
-//    @GetMapping("/all")
-//    public List<User> findByDomain() {
-//        return userDao.findAll();
-
-//    }
 
 }

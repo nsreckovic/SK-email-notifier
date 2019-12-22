@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import rs.sk.s1.dao.SubscriptionDao;
 import rs.sk.s1.domain.dto.*;
 import rs.sk.s1.service.SubscriptionService;
 
@@ -17,9 +16,7 @@ public class SubscriptionCtrl {
 
     private final SubscriptionService subscriptionService;
 
-    private final SubscriptionDao subscriptionDao;
-
-    private static final Logger logger = LoggerFactory.getLogger("SchedulerService");
+    private static final Logger logger = LoggerFactory.getLogger("Subscription Controler");
 
     @CrossOrigin
     @PostMapping("/save")
@@ -67,4 +64,5 @@ public class SubscriptionCtrl {
     public List<WeatherDto> getNotSubscribedWeather(@RequestBody String email) {
         return subscriptionService.getNotSubscribedWeather(email);
     }
+
 }
