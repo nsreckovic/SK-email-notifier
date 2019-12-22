@@ -17,14 +17,13 @@ public class WeatherCtrl {
 
     private final WeatherServiceImpl weatherService;
 
-    private static final Logger logger = LoggerFactory.getLogger("SchedulerService");
+    private static final Logger logger = LoggerFactory.getLogger("Weather Controller");
 
     @GetMapping("/{country}/{city}")
     public Weather getWeatherByCityAndCountry(@PathVariable("country") String country, @PathVariable("city") String city){
         return weatherService.getWeatherByCityAndCountry(city, country);
     }
 
-    // Over here boys
     @GetMapping("/updateAll")
     @Scheduled(fixedRate = 21600000) // Every 6h
     public List<Weather> updateWeather(){
