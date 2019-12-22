@@ -35,7 +35,7 @@
         },
         methods: {
             submit: function () {
-                axios.post('http://localhost:8081/user/login', this.form).then((response) => {
+                axios.post('http://localhost:9000/s1/user/login', this.form).then((response) => {
                     // eslint-disable-next-line no-console
                     if (typeof response.data.email === 'undefined') {
                         this.$notify({

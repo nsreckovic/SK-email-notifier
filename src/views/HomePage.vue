@@ -60,7 +60,7 @@
         methods: {
             subscribe: function(){
                 if (!this.selectAll) {
-                    axios.post('http://localhost:8081/subscription/saveSubscriptions', {email:this.$store.state.user.email, cities:this.selected}).then((response) => {
+                    axios.post('http://localhost:9000/s1/subscription/saveSubscriptions', {email:this.$store.state.user.email, cities:this.selected}).then((response) => {
                         this.asd = response;
                         this.$router.push('/mySubscriptions');
                         this.$notify({
@@ -90,7 +90,7 @@
             },
             init: function(){
                 if (this.$store.state.loggedIn){
-                    axios.post('http://localhost:8081/subscription/getNotSubscribedWeather',this.$store.state.user.email).then((response) => {
+                    axios.post('http://localhost:9000/s1/subscription/getNotSubscribedWeather',this.$store.state.user.email).then((response) => {
                         this.items = response.data;
                     }).catch((error) => {
                         this.$notify({
@@ -101,7 +101,7 @@
                         });
                     });
                 } else {
-                    axios.get('http://localhost:8082/weather/findAll').then((response) => {
+                    axios.get('http://localhost:9000/s2/weather/findAll').then((response) => {
                         this.items = response.data;
                     }).catch((error) => {
                         this.$notify({

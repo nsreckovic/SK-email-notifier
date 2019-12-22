@@ -60,7 +60,7 @@
         methods: {
             unsubscribe: function(){
                 if (!this.selectAll) {
-                    axios.post('http://localhost:8081/subscription/removeSubscriptions', {email:this.$store.state.user.email, cities:this.selected}).then((response) => {
+                    axios.post('http://localhost:9000/s1/subscription/removeSubscriptions', {email:this.$store.state.user.email, cities:this.selected}).then((response) => {
                         // eslint-disable-next-line no-console
                         this.asd = response;
                         this.$notify({
@@ -90,7 +90,7 @@
                 }
             },
             init: function(){
-                axios.post('http://localhost:8081/subscription/getSubscribedWeather',this.$store.state.user.email).then((response) => {
+                axios.post('http://localhost:9000/s1/subscription/getSubscribedWeather',this.$store.state.user.email).then((response) => {
                     this.items = response.data;
                 }).catch((error) => {
                     this.$notify({

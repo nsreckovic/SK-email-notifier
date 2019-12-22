@@ -58,7 +58,7 @@
                     });
                 } else {
                     if (this.form.password === this.form.password2) {
-                        axios.post('http://localhost:8081/user/save', this.form).then((response) => {
+                        axios.post('http://localhost:9000/s1/user/save', this.form).then((response) => {
                             this.asd = response;
                             this.$router.push('/users/login');
                             this.$notify({
